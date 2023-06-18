@@ -5,6 +5,7 @@ import com.sneha.Practise1.entity.User;
 import com.sneha.Practise1.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -40,5 +41,23 @@ public class UserService {
     }
 
 
-
+    public String updateUserById(Long id, User user) {
+        Optional<User> user_fetched =  userRepository.findById(id);
+        if(user_fetched.isPresent()) {
+            if (Objects.nonNull(user_fetched.get().getUsername()) && !"".equalsIgnoreCase(user.getUsername())) {
+                user.setUsername(user.getUsername());
+            }
+            if (Objects.nonNull(user_fetched.get().getAge())) {
+                user.setAge(user.getAge());
+            }
+            if (Objects.nonNull(user_fetched.get()) && !"".equalsIgnoreCase(user.getUsername())) {
+                user.setUsername(user.getUsername());
+            }
+            userRepository.save(user);
+            return "USER UPDATED BY ADMIN";
+        }
+        else {
+            return "USER NOT FOUND";
+        }
+    }
 }

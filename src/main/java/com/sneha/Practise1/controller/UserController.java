@@ -67,6 +67,16 @@ public class UserController {
             String errorMessage = "ADMIN NOT FOUND, ADMIN NEEDS TO LOGIN";
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
         }
+        // return ResponseEntity.ok().build();    // MAGIC IN HERE
     }
-    // return ResponseEntity.ok().build();    // MAGIC IN HERE
+    @PutMapping("/update-user/{id}")
+    public String updateUserById(@PathVariable Long id,User user,HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            return userService.updateUserById(id,user);
+        } else {
+            return "ADMIN NOT FOUND, ADMIN NEEDS TO LOGIN";
+        }
+    }
+
 }
