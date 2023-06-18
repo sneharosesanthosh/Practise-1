@@ -5,6 +5,7 @@ import com.sneha.Practise1.entity.User;
 import com.sneha.Practise1.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -27,6 +28,17 @@ public class UserService {
         userRepository.deleteById(id);    // USE findById(id)
         return "USER DELETED";
     }
+
+    public User getUserById(Long id) {
+        Optional<User> user_fetched = userRepository.findById(id);
+        if(user_fetched.isPresent()) {
+            return user_fetched.get();
+        }
+        else {
+            return null;
+        }
+    }
+
 
 
 }

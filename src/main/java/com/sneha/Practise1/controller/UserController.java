@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
@@ -22,15 +24,17 @@ public class UserController {
     }
 
     @PostMapping("/create-user")
-    public String saveUser(@RequestBody User user, HttpSession session) {
+    public ResponseEntity<?> saveUser(@RequestBody User user, HttpSession session) {
         String username = (String) session.getAttribute("username");
         if (username != null) {
             userService.saveUser(user);
-            return "USER CREATED BY ADMIN";
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Success");
+            response.put("data", user);
+            return ResponseEntity.ok(response);
         } else {
-            return "ADMIN NOT FOUND, ADMIN NEEDS TO LOGIN";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ADMIN NOT FOUND, ADMIN NEEDS TO LOGIN");
         }
-
     }
 
     @GetMapping("/get-users")
@@ -49,4 +53,19 @@ public class UserController {
         }
     }
 
-}
+    @GetMapping("/get-user/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            User user = userService.getUserById(id);
+            if (user != null) {
+                return ResponseEntity.ok(user);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("USER NOT FOUND");
+            }
+        } else {
+            String errorMessage = "ADMIN NOT FOUND, ADMIN NEEDS TO LOGIN";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
+        }
+        // return ResponseEntity.ok().build();    // MAGIC IN HERE
+    }
