@@ -6,7 +6,9 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
@@ -34,6 +36,17 @@ public class UserController {
     @GetMapping("/get-users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @DeleteMapping("/delete-user/{id}")
+    public String deleteUserById(@PathVariable Long id, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            userService.deleteUserById(id);
+            return "USER DELETED BY ADMIN";
+        } else {
+            return "ADMIN NOT FOUND, ADMIN NEEDS TO LOGIN";
+        }
     }
 
 }

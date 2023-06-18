@@ -23,8 +23,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
-
-
+    public String deleteUserById(Long id) {
+        userRepository.deleteById(id);    // USE findById(id)
+        return "USER DELETED";
+    }
 
 
 }
