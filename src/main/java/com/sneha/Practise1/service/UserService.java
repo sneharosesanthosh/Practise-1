@@ -1,9 +1,11 @@
 package com.sneha.Practise1.service;
 
-import com.sneha.Practise1.entity.Admin;
+
 import com.sneha.Practise1.entity.User;
 import com.sneha.Practise1.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import java.util.List;
+
 
 @Service
 public class UserService {
@@ -13,9 +15,13 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User saveuser(User user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
+
+
+
+
 
 
 }

@@ -2,11 +2,15 @@ package com.sneha.Practise1.controller;
 
 import com.sneha.Practise1.entity.User;
 import com.sneha.Practise1.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -16,9 +20,18 @@ public class UserController {
     }
 
     @PostMapping("/create-user")
-    public User saveUser(@RequestBody User user) {
-        return userService.saveuser(user);
+    public String saveUser(@RequestBody User user, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            userService.saveUser(user);
+            return "USER CREATED BY ADMIN";
+        } else {
+            return "ADMIN NOT FOUND, ADMIN NEEDS TO LOGIN";
+        }
+
     }
+
+
 
 
 }
