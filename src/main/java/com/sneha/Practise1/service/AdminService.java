@@ -1,7 +1,9 @@
 package com.sneha.Practise1.service;
 
 import com.sneha.Practise1.entity.Admin;
+import com.sneha.Practise1.entity.User;
 import com.sneha.Practise1.repository.AdminRepository;
+import com.sneha.Practise1.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,10 @@ import java.util.Optional;
 @Slf4j
 public class AdminService {
     private final AdminRepository adminRepository;
-
-    public AdminService(AdminRepository adminRepository) {
+    private final UserRepository userRepository;
+    public AdminService(AdminRepository adminRepository, UserRepository userRepository) {
         this.adminRepository = adminRepository;
+        this.userRepository = userRepository;
     }
 
     public String saveAdmin(Admin admin) {
@@ -66,4 +69,11 @@ public class AdminService {
         }
         return null;
     }
+
+
+
+
+
+
+
 }

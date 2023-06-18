@@ -15,10 +15,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/create-user")
-    public User saveUser(@RequestBody User user) {
-        return userService.saveuser(user);
-    }
 
 
 }
