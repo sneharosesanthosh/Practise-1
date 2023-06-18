@@ -1,7 +1,6 @@
 package com.sneha.Practise1.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
@@ -10,9 +9,9 @@ import lombok.Data;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private Long id;
     private String username;
-    private String password;
+    private String password;  //is password required for user here?
     private Integer age;
 
 }

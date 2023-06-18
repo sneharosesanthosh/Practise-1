@@ -40,7 +40,6 @@ public class UserService {
         }
     }
 
-
     public String updateUserById(Long id, User user) {
         Optional<User> user_fetched =  userRepository.findById(id);
         if(user_fetched.isPresent()) {
