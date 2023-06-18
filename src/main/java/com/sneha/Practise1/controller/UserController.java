@@ -29,7 +29,7 @@ public class UserController {
         if (username != null) {
             userService.saveUser(user);
             Map<String, Object> response = new HashMap<>();
-            response.put("message", "Success");
+            response.put("message", "USER CREATED");
             response.put("data", user);
             return ResponseEntity.ok(response);
         } else {
@@ -67,5 +67,6 @@ public class UserController {
             String errorMessage = "ADMIN NOT FOUND, ADMIN NEEDS TO LOGIN";
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
         }
-        // return ResponseEntity.ok().build();    // MAGIC IN HERE
     }
+    // return ResponseEntity.ok().build();    // MAGIC IN HERE
+}
