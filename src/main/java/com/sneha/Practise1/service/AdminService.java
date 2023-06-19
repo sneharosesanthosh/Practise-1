@@ -47,6 +47,7 @@ public class AdminService {
             else {
                 // username not found, how to return this message.
 //                return "";
+                return null;
             }
 
 

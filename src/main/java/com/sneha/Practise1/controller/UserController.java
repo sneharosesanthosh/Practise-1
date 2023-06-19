@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/user")
@@ -32,6 +31,7 @@ public class UserController {
             response.put("message", "USER CREATED");
             response.put("data", user);
             return ResponseEntity.ok(response);
+//            ResponseEntity.ok().body();
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ADMIN NOT FOUND, ADMIN NEEDS TO LOGIN");
         }
