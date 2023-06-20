@@ -7,6 +7,16 @@ spring:
     username: postgres
     password: Root@089
 
+  # redis config
+  redis:
+  host: localhost
+  port: 6379
+
+servlet:
+  session:
+    timeout: 30m
+
+
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
@@ -17,3 +27,4 @@ spring:
     user:
       password: hello
       name: hello
+

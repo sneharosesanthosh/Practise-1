@@ -53,7 +53,7 @@ public class AdminController {
                 String username = (String) session.getAttribute("username");
                 log.info("Before deletion: "+username);
                 session.invalidate();
-                log.info("After Deletion: ",session.getAttribute("username"));  // causes IllegalStateException
+//                log.info("After Deletion: ",session.getAttribute("username"));  // causes IllegalStateException
                 return "Session deleted.";
             }
         } catch (IllegalStateException e) {
